@@ -1,0 +1,10 @@
+FROM scratch
+
+MAINTAINER Luka Dornhecker <luka.dornhecker@gmail.com>
+
+ADD helix /
+
+ENV PORT=8080
+EXPOSE $PORT
+
+ENTRYPOINT /helix

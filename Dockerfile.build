@@ -1,0 +1,11 @@
+FROM golang
+
+ADD Makefile /
+WORKDIR /
+RUN make setup
+
+ADD . /go/src/github.com/lukad/helix
+
+RUN make buildgo
+
+CMD /bin/bash

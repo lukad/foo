@@ -3,8 +3,18 @@ default: builddocker
 setup:
 	go get github.com/op/go-logging
 	go get github.com/gorilla/mux
+	go get github.com/jteeuwen/go-bindata/...
 
-buildgo:
+js:
+	cd ./go/src/github.com/lukad/helix/frontend; npm run build
+
+assets: js
+	go-bindata -o ./go/src/github.com/lukad/helix/web/assets/assets.go \
+		-pkg assets \
+		-prefix ./go/src/github.com/lukad/helix/frontend/dist \
+		/go/src/github.com/lukad/helix/frontend/dist
+
+buildgo: assets
 	CGO_ENABLED=0 GOOS=linux go build -ldflags "-s" -a -installsuffix cgo -o helix ./go/src/github.com/lukad/helix
 
 builddocker:

@@ -1,10 +1,15 @@
 FROM golang
 
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
+RUN apt-get install -y nodejs
+
 ADD Makefile /
 WORKDIR /
 RUN make setup
 
 ADD . /go/src/github.com/lukad/helix
+
+RUN cd /go/src/github.com/lukad/helix/frontend && npm install
 
 RUN make buildgo
 

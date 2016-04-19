@@ -28,7 +28,7 @@ func init() {
 
 func main() {
 	smtpServer := smtpd.NewServer()
-	if err := smtpServer.Listen(":25"); err != nil {
+	if err := smtpServer.Listen(":2500"); err != nil {
 		log.Fatal(err)
 	}
 

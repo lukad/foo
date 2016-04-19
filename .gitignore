@@ -25,3 +25,7 @@ _testmain.go
 *.prof
 
 helix
+helix.exe
+
+frontend/node_modules
+frontend/dist

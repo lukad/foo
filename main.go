@@ -3,13 +3,14 @@ package main
 import (
 	"os"
 
+	"github.com/lukad/helix/smtpd"
 	"github.com/lukad/helix/web"
 
 	"github.com/op/go-logging"
 )
 
 var (
-	address string = "0.0.0.0"
+	address string = ""
 	port    string = "8080"
 	log     *logging.Logger
 )
@@ -26,8 +27,16 @@ func init() {
 }
 
 func main() {
+	smtpServer := smtpd.NewServer()
+	if err := smtpServer.Listen(":25"); err != nil {
+		log.Fatal(err)
+	}
+
 	server := web.NewServer()
 	if err := server.ListenAndServe(address + ":" + port); err != nil {
 		log.Fatal(err)
+	}
+
+	for {
 	}
 }

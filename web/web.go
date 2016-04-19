@@ -16,24 +16,12 @@ func (s *Server) ListenAndServe(address string) error {
 
 func (s *Server) mailsIndex(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(`[
-  {
-    "from":    "from@example.com",
-    "to":      "to@example.com",
-    "subject": "foo",
-    "body":    "bar"
-  }
-]`))
+	w.Write([]byte(`[{"id":0,"from":"from@example.com","to":"to@example.com","subject":"foo","body":"bar"}]`))
 }
 
 func (s *Server) mailsShow(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(`{
-  "from":    "from@example.com",
-  "to":      "to@example.com",
-  "subject": "foo",
-  "body":    "bar"
-}`))
+	w.Write([]byte(`{"id":0,"from":"from@example.com","to":"to@example.com","subject":"foo","body":"bar"}`))
 }
 
 func (s *Server) mailsDelete(w http.ResponseWriter, req *http.Request) {

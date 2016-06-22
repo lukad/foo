@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '8080:8080'
+    volumes:
+      - .:/go/src/github.com/lukad/helix
+      - dist:/frontend/dist
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/frontend
+      - dist:/frontend/dist
+
+volumes:
+  dist:
+    driver: local

@@ -1,0 +1,15 @@
+FROM golang:1.6.2-alpine
+
+RUN apk add --update git
+
+RUN go get github.com/skelterjohn/rerun
+
+ADD . /go/src/github.com/lukad/helix
+
+WORKDIR /go/src/github.com/lukad/helix
+
+RUN go get
+
+RUN go build
+
+CMD rerun github.com/lukad/helix

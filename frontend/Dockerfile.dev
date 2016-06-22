@@ -1,0 +1,17 @@
+FROM node:6.2.2
+
+RUN apt-get update && apt-get install -y \
+    inotify-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /frontend
+
+WORKDIR /frontend
+
+COPY package.json /frontend
+
+RUN npm install
+
+ADD . /frontend
+
+CMD npm run dev

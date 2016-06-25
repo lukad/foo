@@ -3,23 +3,22 @@ package main
 import (
 	"os"
 
+	"github.com/lukad/helix/mail"
 	"github.com/lukad/helix/smtpd"
+	"github.com/lukad/helix/store"
 	"github.com/lukad/helix/web"
 
-	"github.com/op/go-logging"
+	log "github.com/Sirupsen/logrus"
 )
 
 var (
-	address string = ""
-	port    string = "8080"
-	log     *logging.Logger
+	host string = ""
+	port string = "8080"
 )
 
 func init() {
-	log = logging.MustGetLogger("main")
-
-	if envAddress := os.Getenv("ADDRESS"); envAddress != "" {
-		address = envAddress
+	if envAddress := os.Getenv("HOST"); envAddress != "" {
+		host = envAddress
 	}
 	if envPort := os.Getenv("PORT"); envPort != "" {
 		port = envPort
@@ -27,16 +26,27 @@ func init() {
 }
 
 func main() {
-	smtpServer := smtpd.NewServer()
-	if err := smtpServer.Listen(":2500"); err != nil {
-		log.Fatal(err)
-	}
+	envelopeChannel := make(chan smtpd.Envelope)
 
-	server := web.NewServer()
-	if err := server.ListenAndServe(address + ":" + port); err != nil {
-		log.Fatal(err)
-	}
+	go func() {
+		smtpServer := smtpd.NewServer(envelopeChannel)
+		if err := smtpServer.ListenAndServe(":1025"); err != nil {
+			log.Fatal(err)
+		}
+	}()
 
-	for {
+	s := store.New()
+
+	go func() {
+		for {
+			envelope := <-envelopeChannel
+			m, _ := mail.ParseEnvelope(envelope)
+			s.Insert(m)
+		}
+	}()
+
+	server := web.NewServer(s)
+	if err := server.ListenAndServe(host + ":" + port); err != nil {
+		log.Fatal(err)
 	}
 }

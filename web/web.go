@@ -1,8 +1,10 @@
 package web
 
 import (
+	"encoding/json"
 	"net/http"
 
+	"github.com/lukad/helix/store"
 	"github.com/lukad/helix/web/assets"
 
 	"github.com/gorilla/mux"
@@ -10,6 +12,20 @@ import (
 
 type Server struct {
 	router *mux.Router
+	store  store.Store
+}
+
+type listResponse struct {
+	Items []store.Mail `json:"items"`
+}
+
+type subject struct {
+	Id      int    `json:"id"`
+	Subject string `json:"subject"`
+}
+
+type subjectsResponse struct {
+	Items []subject
 }
 
 func (s *Server) ListenAndServe(address string) error {
@@ -18,7 +34,26 @@ func (s *Server) ListenAndServe(address string) error {
 
 func (s *Server) mailsIndex(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(`[{"id":0,"from":"from@example.com","to":"to@example.com","subject":"foo","body":"bar"}]`))
+	var response listResponse
+	for _, item := range s.store.All() {
+		response.Items = append(response.Items, item)
+	}
+	b, _ := json.Marshal(response)
+	w.Write(b)
+}
+
+func (s *Server) mailsSubjects(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var response subjectsResponse
+	for _, item := range s.store.All() {
+		sub := subject{
+			Id:      item.Id,
+			Subject: item.Header["Subject"][0],
+		}
+		response.Items = append(response.Items, sub)
+	}
+	b, _ := json.Marshal(response)
+	w.Write(b)
 }
 
 func (s *Server) mailsShow(w http.ResponseWriter, req *http.Request) {
@@ -42,11 +77,15 @@ func serveAsset(name string, contentType string) http.HandlerFunc {
 	}
 }
 
-func NewServer() *Server {
+func NewServer(s store.Store) *Server {
 	r := mux.NewRouter()
-	server := &Server{r}
+	server := &Server{
+		router: r,
+		store:  s,
+	}
 
 	r.HandleFunc("/mails", server.mailsIndex).Methods("GET")
+	r.HandleFunc("/mails/subjects", server.mailsSubjects).Methods("GET")
 	r.HandleFunc("/mails/{id:[0-9]+}", server.mailsShow).Methods("GET")
 	r.HandleFunc("/mails/{id:[0-9]+}", server.mailsDelete).Methods("DEL")
 	r.HandleFunc("/helix.js", serveAsset("helix.js", "application/javascript"))

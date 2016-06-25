@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - '8080:8080'
+      - '1025:1025'
     volumes:
       - .:/go/src/github.com/lukad/helix
       - dist:/frontend/dist

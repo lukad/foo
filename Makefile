@@ -1,9 +1,10 @@
 default: builddocker
 
 setup:
-	go get github.com/op/go-logging
+	go get bitbucket.org/chrj/smtpd
 	go get github.com/gorilla/mux
 	go get github.com/jteeuwen/go-bindata/...
+	go get github.com/Sirupsen/logrus
 
 js:
 	cd ./go/src/github.com/lukad/helix/frontend; npm run build

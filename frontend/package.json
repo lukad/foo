@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "webpack -d --watch",
-    "build" : "NODE_ENV=production webpack --progress -p --devtool cheap-module-source-map"
+    "build": "NODE_ENV=production webpack --progress -p --devtool cheap-module-source-map"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
@@ -10,6 +10,8 @@
     "file-loader": "^0.8.5",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
-    "webpack": "^1.13.0"
+    "webpack": "^1.13.0",
+    "babel-core": "^6.16.0",
+    "babel-loader": "^6.2.5"
   }
 }

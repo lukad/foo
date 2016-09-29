@@ -1,19 +1,12 @@
 sudo: required
 
+language: go
+
 services:
   - docker
 
 script:
   - make
 
-after_success:
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  - if [ -n "${TRAVIS_TAG}" ]; then
-      docker tag lukad/helix "lukad/helix:${TRAVIS_TAG}"
-      docker push "lukad/helix:${TRAVIS_TAG}";
-      docker push lukad/helix;
-    fi
-  - if [ "${TRAVIS_BRANCH}" == "develop" ]; then
-      docker tag lukad/helix lukad/helix:develop
-      docker push lukad/helix:develop
-    fi
+deploy:
+  provider: script

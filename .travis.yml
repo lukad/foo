@@ -10,3 +10,4 @@ script:
 
 deploy:
   provider: script
+  all_branches: true

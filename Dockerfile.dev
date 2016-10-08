@@ -12,4 +12,4 @@ RUN go get
 
 RUN go build
 
-CMD rerun github.com/lukad/helix
+CMD ["rerun", "github.com/lukad/helix"]

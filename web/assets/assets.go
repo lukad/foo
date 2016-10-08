@@ -29,9 +29,9 @@ type asset struct {
 	info  os.FileInfo
 }
 
-// frontendDistHelixJs reads file data from disk. It returns an error on failure.
-func frontendDistHelixJs() (*asset, error) {
-	path := "/frontend/dist/helix.js"
+// frontendPublicHelixJs reads file data from disk. It returns an error on failure.
+func frontendPublicHelixJs() (*asset, error) {
+	path := "/frontend/public/helix.js"
 	name := "helix.js"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
@@ -47,9 +47,9 @@ func frontendDistHelixJs() (*asset, error) {
 	return a, err
 }
 
-// frontendDistHelixJsMap reads file data from disk. It returns an error on failure.
-func frontendDistHelixJsMap() (*asset, error) {
-	path := "/dist/helix.js.map"
+// frontendPublicHelixJsMap reads file data from disk. It returns an error on failure.
+func frontendPublicHelixJsMap() (*asset, error) {
+	path := "/frontend/public/helix.js.map"
 	name := "helix.js.map"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
@@ -65,9 +65,45 @@ func frontendDistHelixJsMap() (*asset, error) {
 	return a, err
 }
 
-// frontendDistIndexHtml reads file data from disk. It returns an error on failure.
-func frontendDistIndexHtml() (*asset, error) {
-	path := "/frontend/dist/index.html"
+// frontendPublicHelixCss reads file data from disk. It returns an error on failure.
+func frontendPublicHelixCss() (*asset, error) {
+	path := "/frontend/public/helix.css"
+	name := "helix.css"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// frontendPublicHelixCssMap reads file data from disk. It returns an error on failure.
+func frontendPublicHelixCssMap() (*asset, error) {
+	path := "/frontend/public/helix.css.map"
+	name := "helix.css.map"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// frontendPublicIndexHtml reads file data from disk. It returns an error on failure.
+func frontendPublicIndexHtml() (*asset, error) {
+	path := "/frontend/public/index.html"
 	name := "index.html"
 	bytes, err := bindataRead(path, name)
 	if err != nil {
@@ -135,9 +171,11 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"helix.js":     frontendDistHelixJs,
-	"helix.js.map": frontendDistHelixJsMap,
-	"index.html":   frontendDistIndexHtml,
+	"helix.js":      frontendPublicHelixJs,
+	"helix.js.map":  frontendPublicHelixJsMap,
+	"helix.css":     frontendPublicHelixCss,
+	"helix.css.map": frontendPublicHelixCssMap,
+	"index.html":    frontendPublicIndexHtml,
 }
 
 // AssetDir returns the file names below a certain
@@ -181,9 +219,11 @@ type bintree struct {
 }
 
 var _bintree = &bintree{nil, map[string]*bintree{
-	"helix.js":     &bintree{frontendDistHelixJs, map[string]*bintree{}},
-	"helix.js.map": &bintree{frontendDistHelixJsMap, map[string]*bintree{}},
-	"index.html":   &bintree{frontendDistIndexHtml, map[string]*bintree{}},
+	"helix.js":      &bintree{frontendPublicHelixJs, map[string]*bintree{}},
+	"helix.js.map":  &bintree{frontendPublicHelixJsMap, map[string]*bintree{}},
+	"helix.css":     &bintree{frontendPublicHelixCss, map[string]*bintree{}},
+	"helix.css.map": &bintree{frontendPublicHelixCssMap, map[string]*bintree{}},
+	"index.html":    &bintree{frontendPublicIndexHtml, map[string]*bintree{}},
 }}
 
 // RestoreAsset restores an asset under the given directory

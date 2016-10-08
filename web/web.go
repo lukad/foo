@@ -90,6 +90,8 @@ func NewServer(s store.Store) *Server {
 	r.HandleFunc("/mails/{id:[0-9]+}", server.mailsDelete).Methods("DEL")
 	r.HandleFunc("/helix.js", serveAsset("helix.js", "application/javascript"))
 	r.HandleFunc("/helix.js.map", serveAsset("helix.js.map", "application/javascript"))
+	r.HandleFunc("/helix.css", serveAsset("helix.css", "application/css"))
+	r.HandleFunc("/helix.css.map", serveAsset("helix.css.map", "application/css"))
 	r.HandleFunc("/", serveAsset("index.html", "text/html"))
 
 	return server

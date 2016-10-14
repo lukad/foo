@@ -5,6 +5,23 @@ exports.config = {
   },
 
   plugins: {
-    babel: { presets: ['es2015', 'react'] }
+    babel: { presets: ['es2015', 'react'] },
+    sass: {
+      options: {
+        includePaths: ['node_modules/bootstrap-sass/assets/stylesheets'],
+        precision: 8
+      }
+    },
+    copycat: {
+      "fonts": ["node_modules/bootstrap-sass/assets/fonts"]
+    }
+  },
+
+  npm: {
+    enabled: true,
+    globals: {
+      $: 'jquery',
+      jQuery: 'jquery'
+    }
   }
 };

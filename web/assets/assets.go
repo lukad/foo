@@ -101,6 +101,24 @@ func frontendPublicHelixCssMap() (*asset, error) {
 	return a, err
 }
 
+// frontendPublicFontsBootstrapGlyphiconsHalflingsRegularTtf reads file data from disk. It returns an error on failure.
+func frontendPublicFontsBootstrapGlyphiconsHalflingsRegularTtf() (*asset, error) {
+	path := "/frontend/public/fonts/bootstrap/glyphicons-halflings-regular.ttf"
+	name := "fonts/bootstrap/glyphicons-halflings-regular.ttf"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // frontendPublicIndexHtml reads file data from disk. It returns an error on failure.
 func frontendPublicIndexHtml() (*asset, error) {
 	path := "/frontend/public/index.html"
@@ -175,6 +193,7 @@ var _bindata = map[string]func() (*asset, error){
 	"helix.js.map":  frontendPublicHelixJsMap,
 	"helix.css":     frontendPublicHelixCss,
 	"helix.css.map": frontendPublicHelixCssMap,
+	"":              frontendPublicFontsBootstrapGlyphiconsHalflingsRegularTtf,
 	"index.html":    frontendPublicIndexHtml,
 }
 
@@ -219,11 +238,12 @@ type bintree struct {
 }
 
 var _bintree = &bintree{nil, map[string]*bintree{
-	"helix.js":      &bintree{frontendPublicHelixJs, map[string]*bintree{}},
-	"helix.js.map":  &bintree{frontendPublicHelixJsMap, map[string]*bintree{}},
-	"helix.css":     &bintree{frontendPublicHelixCss, map[string]*bintree{}},
-	"helix.css.map": &bintree{frontendPublicHelixCssMap, map[string]*bintree{}},
-	"index.html":    &bintree{frontendPublicIndexHtml, map[string]*bintree{}},
+	"helix.js":                                         &bintree{frontendPublicHelixJs, map[string]*bintree{}},
+	"helix.js.map":                                     &bintree{frontendPublicHelixJsMap, map[string]*bintree{}},
+	"helix.css":                                        &bintree{frontendPublicHelixCss, map[string]*bintree{}},
+	"helix.css.map":                                    &bintree{frontendPublicHelixCssMap, map[string]*bintree{}},
+	"fonts/bootstrap/glyphicons-halflings-regular.ttf": &bintree{frontendPublicFontsBootstrapGlyphiconsHalflingsRegularTtf, map[string]*bintree{}},
+	"index.html": &bintree{frontendPublicIndexHtml, map[string]*bintree{}},
 }}
 
 // RestoreAsset restores an asset under the given directory

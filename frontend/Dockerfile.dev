@@ -2,7 +2,9 @@ FROM node:6.3.1
 
 RUN apt-get update && apt-get install -y \
     inotify-tools \
-    && rm -rf /var/lib/apt/lists/*
+    ruby \
+    && rm -rf /var/lib/apt/lists/* \
+    && gem install sass
 
 RUN mkdir /frontend
 WORKDIR /frontend

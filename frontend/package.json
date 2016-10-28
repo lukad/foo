@@ -1,12 +1,6 @@
 {
   "name": "helix",
-  "description": "Description",
-  "author": "Your Name",
   "version": "0.0.1",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "scripts": {
     "start": "brunch watch --server",
     "prod": "brunch build --production"

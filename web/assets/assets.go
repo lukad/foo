@@ -119,6 +119,78 @@ func frontendPublicFontsBootstrapGlyphiconsHalflingsRegularTtf() (*asset, error)
 	return a, err
 }
 
+// frontendPublicFontsBootstrapGlyphiconsHalflingsRegularEot reads file data from disk. It returns an error on failure.
+func frontendPublicFontsBootstrapGlyphiconsHalflingsRegularEot() (*asset, error) {
+	path := "/frontend/public/fonts/bootstrap/glyphicons-halflings-regular.eot"
+	name := "fonts/bootstrap/glyphicons-halflings-regular.eot"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// frontendPublicFontsBootstrapGlyphiconsHalflingsRegularSvg reads file data from disk. It returns an error on failure.
+func frontendPublicFontsBootstrapGlyphiconsHalflingsRegularSvg() (*asset, error) {
+	path := "/frontend/public/fonts/bootstrap/glyphicons-halflings-regular.svg"
+	name := "fonts/bootstrap/glyphicons-halflings-regular.svg"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// frontendPublicFontsBootstrapGlyphiconsHalflingsRegularWoff reads file data from disk. It returns an error on failure.
+func frontendPublicFontsBootstrapGlyphiconsHalflingsRegularWoff() (*asset, error) {
+	path := "/frontend/public/fonts/bootstrap/glyphicons-halflings-regular.woff"
+	name := "fonts/bootstrap/glyphicons-halflings-regular.woff"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// frontendPublicFontsBootstrapGlyphiconsHalflingsRegularWoff2 reads file data from disk. It returns an error on failure.
+func frontendPublicFontsBootstrapGlyphiconsHalflingsRegularWoff2() (*asset, error) {
+	path := "/frontend/public/fonts/bootstrap/glyphicons-halflings-regular.woff2"
+	name := "fonts/bootstrap/glyphicons-halflings-regular.woff2"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // frontendPublicIndexHtml reads file data from disk. It returns an error on failure.
 func frontendPublicIndexHtml() (*asset, error) {
 	path := "/frontend/public/index.html"
@@ -189,12 +261,16 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"helix.js":      frontendPublicHelixJs,
-	"helix.js.map":  frontendPublicHelixJsMap,
-	"helix.css":     frontendPublicHelixCss,
-	"helix.css.map": frontendPublicHelixCssMap,
-	"":              frontendPublicFontsBootstrapGlyphiconsHalflingsRegularTtf,
-	"index.html":    frontendPublicIndexHtml,
+	"helix.js":                                           frontendPublicHelixJs,
+	"helix.js.map":                                       frontendPublicHelixJsMap,
+	"helix.css":                                          frontendPublicHelixCss,
+	"helix.css.map":                                      frontendPublicHelixCssMap,
+	"fonts/bootstrap/glyphicons-halflings-regular.ttf":   frontendPublicFontsBootstrapGlyphiconsHalflingsRegularTtf,
+	"fonts/bootstrap/glyphicons-halflings-regular.eot":   frontendPublicFontsBootstrapGlyphiconsHalflingsRegularEot,
+	"fonts/bootstrap/glyphicons-halflings-regular.svg":   frontendPublicFontsBootstrapGlyphiconsHalflingsRegularSvg,
+	"fonts/bootstrap/glyphicons-halflings-regular.woff":  frontendPublicFontsBootstrapGlyphiconsHalflingsRegularWoff,
+	"fonts/bootstrap/glyphicons-halflings-regular.woff2": frontendPublicFontsBootstrapGlyphiconsHalflingsRegularWoff2,
+	"index.html":                                         frontendPublicIndexHtml,
 }
 
 // AssetDir returns the file names below a certain
@@ -206,7 +282,7 @@ var _bindata = map[string]func() (*asset, error){
 //       img/
 //         a.png
 //         b.png
-// then AssetDir("data") would return []string{"foo.txt", "img"}
+ // then AssetDir("data") would return []string{"foo.txt", "img"}
 // AssetDir("data/img") would return []string{"a.png", "b.png"}
 // AssetDir("foo.txt") and AssetDir("notexist") would return an error
 // AssetDir("") will return []string{"data"}.
@@ -243,6 +319,10 @@ var _bintree = &bintree{nil, map[string]*bintree{
 	"helix.css":                                        &bintree{frontendPublicHelixCss, map[string]*bintree{}},
 	"helix.css.map":                                    &bintree{frontendPublicHelixCssMap, map[string]*bintree{}},
 	"fonts/bootstrap/glyphicons-halflings-regular.ttf": &bintree{frontendPublicFontsBootstrapGlyphiconsHalflingsRegularTtf, map[string]*bintree{}},
+	"fonts/bootstrap/glyphicons-halflings-regular.eot": &bintree{frontendPublicFontsBootstrapGlyphiconsHalflingsRegularEot, map[string]*bintree{}},
+	"fonts/bootstrap/glyphicons-halflings-regular.svg": &bintree{frontendPublicFontsBootstrapGlyphiconsHalflingsRegularSvg, map[string]*bintree{}},
+	"fonts/bootstrap/glyphicons-halflings-regular.woff": &bintree{frontendPublicFontsBootstrapGlyphiconsHalflingsRegularWoff, map[string]*bintree{}},
+	"fonts/bootstrap/glyphicons-halflings-regular.woff2": &bintree{frontendPublicFontsBootstrapGlyphiconsHalflingsRegularWoff2, map[string]*bintree{}},
 	"index.html": &bintree{frontendPublicIndexHtml, map[string]*bintree{}},
 }}
 

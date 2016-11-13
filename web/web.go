@@ -25,7 +25,7 @@ type subject struct {
 }
 
 type subjectsResponse struct {
-	Items []subject
+	Items []subject `json:"items"`
 }
 
 func (s *Server) ListenAndServe(address string) error {
@@ -92,6 +92,11 @@ func NewServer(s store.Store) *Server {
 	r.HandleFunc("/helix.js.map", serveAsset("helix.js.map", "application/javascript"))
 	r.HandleFunc("/helix.css", serveAsset("helix.css", "text/css"))
 	r.HandleFunc("/helix.css.map", serveAsset("helix.css.map", "text/css"))
+	r.HandleFunc("/fonts/bootstrap/glyphicons-halflings-regular.ttf", serveAsset("fonts/bootstrap/glyphicons-halflings-regular.ttf", "text/css"))
+	r.HandleFunc("/fonts/bootstrap/glyphicons-halflings-regular.eot", serveAsset("fonts/bootstrap/glyphicons-halflings-regular.eot", "text/css"))
+	r.HandleFunc("/fonts/bootstrap/glyphicons-halflings-regular.svg", serveAsset("fonts/bootstrap/glyphicons-halflings-regular.svg", "text/css"))
+	r.HandleFunc("/fonts/bootstrap/glyphicons-halflings-regular.woff", serveAsset("fonts/bootstrap/glyphicons-halflings-regular.woff", "text/css"))
+	r.HandleFunc("/fonts/bootstrap/glyphicons-halflings-regular.woff2", serveAsset("fonts/bootstrap/glyphicons-halflings-regular.woff2", "text/css"))
 	r.HandleFunc("/", serveAsset("index.html", "text/html"))
 
 	return server

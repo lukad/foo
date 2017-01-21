@@ -1,6 +1,6 @@
 FROM golang:1.7.1-alpine
 
-RUN apk add --update git mercurial
+RUN apk --no-cache add git mercurial
 
 RUN go get github.com/skelterjohn/rerun
 

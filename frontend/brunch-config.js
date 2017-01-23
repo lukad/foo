@@ -5,7 +5,10 @@ exports.config = {
   },
 
   plugins: {
-    babel: { presets: ['es2015', 'react'] },
+    babel: {
+      presets: ['es2015', 'react'],
+      plugins: ['transform-es2015-destructuring', 'transform-object-rest-spread']
+    },
     sass: {
       options: {
         includePaths: ['node_modules/bootstrap-sass/assets/stylesheets'],

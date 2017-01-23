@@ -5,6 +5,10 @@ language: go
 services:
   - docker
 
+before_install:
+  - sudo apt-get install ruby
+  - sudo gem install sass
+
 script:
   - make
 
